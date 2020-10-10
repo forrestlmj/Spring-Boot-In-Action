@@ -50,6 +50,13 @@ public class User implements UserDetails {
     public void setRoles(List<Role> roles) {
         this.roles = roles;
     }
+    public void setRolesByName(String[] rolesByName) {
+        List<Role> roles = new ArrayList<>();
+        for(String roleByName:rolesByName){
+            roles.add(new Role((long) 1,roleByName));
+        }
+        this.roles = roles;
+    }
 
     // 下面为实现UserDetails而需要的重写方法！
 

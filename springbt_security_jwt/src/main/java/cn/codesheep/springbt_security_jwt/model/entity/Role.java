@@ -24,11 +24,16 @@ public class Role {
     public void setId(Long id) {
         this.id = id;
     }
+    public Role(){
 
+    }
     public String getName() {
         return name;
     }
-
+    public Role(Long id,String name){
+        this.id = id;
+        this.name = name;
+    }
     public void setName(String name) {
         this.name = name;
     }
