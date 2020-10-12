@@ -1,6 +1,7 @@
 package cn.codesheep.springbt_security_jwt.controller;
 
 import cn.codesheep.springbt_security_jwt.comm.Const;
+import cn.codesheep.springbt_security_jwt.model.entity.Role;
 import cn.codesheep.springbt_security_jwt.model.entity.User;
 import cn.codesheep.springbt_security_jwt.service.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,7 +35,6 @@ public class JwtAuthController {
     @RequestMapping(value = "/authentication/register", method = RequestMethod.POST)
     public User register( @RequestBody User addedUser ) throws AuthenticationException {
 //        List<String> defaultRoles = Arrays.asList(Const.DEFAULT_ROLES);
-        //TODO 已注册则返回
         addedUser.setRolesByName(Const.DEFAULT_ROLES);
         return authService.register(addedUser);
     }
