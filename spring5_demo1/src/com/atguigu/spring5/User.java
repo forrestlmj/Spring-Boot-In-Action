@@ -24,4 +24,11 @@ public class User {
         System.out.println(user);
         user.add();
     }
+    @Test
+    public void testBook(){
+        ApplicationContext applicationContext =
+                new ClassPathXmlApplicationContext("bean1.xml");
+        Book book = applicationContext.getBean("book", Book.class);
+        System.out.println(book);
+    }
 }
