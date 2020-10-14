@@ -10,7 +10,8 @@
         <value>西游</value>
         <value>红楼</value>
     </util:list>
-    <bean id="book" class="com.atguigu.spring5.collectiontype.Book" scope="prototype">
+
+    <bean id="book" class="com.atguigu.spring5.collectiontype.Book" scope="singleton">
         <property name="list" ref="bookList"></property>
     </bean>
 </beans>

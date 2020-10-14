@@ -1,6 +1,7 @@
 package com.atguigu.spring5.testdemo;
 
 import com.atguigu.spring5.collectiontype.Book;
+import com.atguigu.spring5.collectiontype.Course;
 import com.atguigu.spring5.collectiontype.Stu;
 import org.junit.jupiter.api.DynamicTest;
 import org.junit.jupiter.api.Test;
@@ -26,11 +27,24 @@ public class TestSpring5Demo1 {
     }
     @Test
     public void testBean2(){
+        /**
+         * bean中可以控制每次新建是单实例还是多实例，默认是单实例。
+         */
         ApplicationContext applicationContext =
                 new ClassPathXmlApplicationContext("bean2.xml");
         Book book1 = applicationContext.getBean("book",Book.class);
         Book book2 = applicationContext.getBean("book",Book.class);
         System.out.println(book1);
         System.out.println(book2);
+    }
+    @Test
+    public void testBean3(){
+        /***
+         * 使用工厂模式
+         */
+        ApplicationContext applicationContext =
+                new ClassPathXmlApplicationContext("bean3.xml");
+        Course course = applicationContext.getBean("myBean", Course.class);
+        System.out.println(course);
     }
 }
