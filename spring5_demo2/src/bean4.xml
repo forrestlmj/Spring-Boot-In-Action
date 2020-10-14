@@ -6,5 +6,7 @@
         <property name="oname" value="手机"></property>
     </bean>
 
+    <!--配置后置处理器-->
+    <bean id="myBeanPost" class="com.atguigu.spring5.bean.MyBeanPost"></bean>
 
 </beans>
