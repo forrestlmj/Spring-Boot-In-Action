@@ -1,15 +1,13 @@
 package com.atguigu.spring5.testdemo;
 
+import com.atguigu.spring5.autowirex.Emp;
 import com.atguigu.spring5.bean.Orders;
 import com.atguigu.spring5.collectiontype.Book;
 import com.atguigu.spring5.collectiontype.Course;
 import com.atguigu.spring5.collectiontype.Stu;
-import org.junit.jupiter.api.DynamicTest;
 import org.junit.jupiter.api.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-
-import java.util.List;
 
 /**
  * @author ：xxx
@@ -68,6 +66,21 @@ public class TestSpring5Demo1 {
         System.out.println(orders);
 
         applicationContext.close();
+    }
+    @Test
+    public void test4() {
+        /**
+         *     <!--实现自动装配
+         *         bean标签属性autowire，配置自动装配
+         *         autowire属性常用两个值：
+         *             byName根据属性名称注入 ，注入值bean的id值和类属性名称一样
+         *             byType根据属性类型注入
+         *     -->
+         */
+        ApplicationContext context =
+                new ClassPathXmlApplicationContext("bean5.xml");
+        Emp emp = context.getBean("emp", Emp.class);
+        System.out.println(emp);
     }
 
 }
