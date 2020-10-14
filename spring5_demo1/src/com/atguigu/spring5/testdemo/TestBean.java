@@ -50,10 +50,19 @@ public class TestBean {
         UserService userService = applicationContext.getBean("userService",UserService.class);
         userService.add();
     }
+
     @Test
     public void testBean3(){
         ApplicationContext applicationContext =
                 new ClassPathXmlApplicationContext("bean3.xml");
+        Emp emp = applicationContext.getBean("emp", Emp.class);
+        System.out.println(emp);
+    }
+
+    @Test
+    public void testBean4(){
+        ApplicationContext applicationContext =
+                new ClassPathXmlApplicationContext("bean4.xml");
         Emp emp = applicationContext.getBean("emp", Emp.class);
         System.out.println(emp);
     }
