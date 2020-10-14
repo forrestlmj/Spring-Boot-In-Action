@@ -1,5 +1,6 @@
 package com.atguigu.spring5.testdemo;
 
+import com.atguigu.spring5.bean.Orders;
 import com.atguigu.spring5.collectiontype.Book;
 import com.atguigu.spring5.collectiontype.Course;
 import com.atguigu.spring5.collectiontype.Stu;
@@ -47,4 +48,26 @@ public class TestSpring5Demo1 {
         Course course = applicationContext.getBean("myBean", Course.class);
         System.out.println(course);
     }
+    @Test
+    public void testBean4(){
+        /***
+         * IOC 操作 Bean 管理(bean 生命周期)
+         * 1、生命周期
+         * (1)从对象创建到对象销毁的过程
+         * 2、bean 生命周期
+         * (1)通过构造器创建 bean 实例(无参数构造)
+         * (2)为 bean 的属性设置值和对其他 bean 引用(调用 set 方法)
+         * (3)调用 bean 的初始化的方法(需要进行配置初始化的方法)
+         * (4)bean 可以使用了(对象获取到了)
+         * (5)当容器关闭时候,调用 bean 的销毁的方法(需要进行配置销毁的方法)
+         */
+        ClassPathXmlApplicationContext applicationContext =
+                new ClassPathXmlApplicationContext("bean4.xml");
+        Orders orders = applicationContext.getBean("orders", Orders.class);
+        System.out.println("第四步 获取创建bean实例对象");
+        System.out.println(orders);
+
+        applicationContext.close();
+    }
+
 }
