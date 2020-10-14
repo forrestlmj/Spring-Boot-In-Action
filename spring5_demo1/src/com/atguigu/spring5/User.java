@@ -16,19 +16,5 @@ public class User {
     public void add(){
         System.out.println("add....");
     }
-    @Test
-    public void testAdd(){
-        ApplicationContext applicationContext =
-                new ClassPathXmlApplicationContext("bean1.xml");
-        User user = applicationContext.getBean("user", User.class);
-        System.out.println(user);
-        user.add();
-    }
-    @Test
-    public void testBook(){
-        ApplicationContext applicationContext =
-                new ClassPathXmlApplicationContext("bean1.xml");
-        Book book = applicationContext.getBean("book", Book.class);
-        System.out.println(book);
-    }
+
 }

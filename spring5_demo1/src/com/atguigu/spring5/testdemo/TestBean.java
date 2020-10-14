@@ -1,0 +1,43 @@
+package com.atguigu.spring5.testdemo;
+
+import com.atguigu.spring5.Book;
+import com.atguigu.spring5.Orders;
+import com.atguigu.spring5.User;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.BeanFactory;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+/**
+ * @author ：xxx
+ * @description：TODO
+ * @date ：10/14/20 1:39 PM
+ */
+
+
+public class TestBean {
+
+    @Test
+    public void testAdd(){
+        ApplicationContext applicationContext =
+                new ClassPathXmlApplicationContext("bean1.xml");
+        User user = applicationContext.getBean("user", User.class);
+        System.out.println(user);
+        user.add();
+    }
+    @Test
+    public void testBook(){
+        ApplicationContext applicationContext =
+                new ClassPathXmlApplicationContext("bean1.xml");
+        Book book = applicationContext.getBean("book", Book.class);
+        System.out.println(book);
+    }
+
+    @Test
+    public void testOrders(){
+        ApplicationContext applicationContext =
+                new ClassPathXmlApplicationContext("bean1.xml");
+        Orders orders = applicationContext.getBean("orders", Orders.class);
+        orders.ordersTest();
+    }
+}
