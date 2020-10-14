@@ -3,6 +3,7 @@ package com.atguigu.spring5.testdemo;
 import com.atguigu.spring5.Book;
 import com.atguigu.spring5.Orders;
 import com.atguigu.spring5.User;
+import com.atguigu.spring5.service.UserService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.context.ApplicationContext;
@@ -39,5 +40,13 @@ public class TestBean {
                 new ClassPathXmlApplicationContext("bean1.xml");
         Orders orders = applicationContext.getBean("orders", Orders.class);
         orders.ordersTest();
+    }
+
+    @Test
+    public void testBean1(){
+        ApplicationContext applicationContext =
+                new ClassPathXmlApplicationContext("bean2.xml");
+        UserService userService = applicationContext.getBean("userService",UserService.class);
+        userService.add();
     }
 }
