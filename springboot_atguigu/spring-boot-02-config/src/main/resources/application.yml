@@ -15,6 +15,7 @@ spring:
   profiles: dev
 test:
   testvalue2: testvaluevalue2Dev
+debug: true
 ---
 server:
   port: 8083
@@ -22,3 +23,4 @@ spring:
   profiles: prod
 test:
   testvalue2: testvaluevalue2Prod
+

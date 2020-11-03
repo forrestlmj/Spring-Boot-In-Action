@@ -4,7 +4,10 @@ import com.atguigu.springboot.bean.Person;
 import com.atguigu.springboot.bean.TestValue;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
@@ -17,7 +20,6 @@ import javax.annotation.Resource;
 
 @RestController
 public class HelloController {
-
 
     @Autowired
     private TestValue testValue;
