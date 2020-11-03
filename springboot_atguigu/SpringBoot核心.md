@@ -140,7 +140,7 @@ pets: [cat,dog,pig]
 
 
 
-
+[@PropertySource与@ConfigurationProperties](https://juejin.im/post/6844903992544198664)
 
 
 
