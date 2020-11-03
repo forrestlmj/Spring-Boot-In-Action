@@ -251,13 +251,38 @@ public class Person{
 
 ### 3.4、@PropertySource与@ImportResource & @Bean
 
+@PropertySource:加载指定的配置文件。
 
+```java
+@PropertySource(value = {"classpath:person.properties"})
+@Component
+@ConfigurationProperties(prefix = "person")
+public class Person{
+    ...
+}
+```
 
-@ConfigurationProperties
+上面的意思指的是从类路径中找到person.properties中找到person为前缀的配置，将配置注入到Person中。
 
 [@PropertySource与@ConfigurationProperties](https://juejin.im/post/6844903992544198664)
 
+### 3.5、使用@Configuration与@Bean给容器中添加组件
 
+```java
+/**
+* @Configuration:当前类是一个配置类，用来替换之前的Spring文件。
+* 等同于<bean></bean>
+*/
+@Configuration
+public class MyAppConfig{
+    //将方法的返回值返回到容器中；容器中这个组件的默认id就是方法名helloService02
+    @Bean
+    public HelloService helloService02(){
+        return new HelloService();
+    }
+}
+
+```
 
 
 
