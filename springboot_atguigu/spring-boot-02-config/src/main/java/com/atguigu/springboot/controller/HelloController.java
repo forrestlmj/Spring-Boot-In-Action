@@ -19,7 +19,7 @@ import javax.annotation.Resource;
 public class HelloController {
 
 
-    @Resource
+    @Autowired
     private TestValue testValue;
     @Value("${person.last-name}")
     private String lastName;

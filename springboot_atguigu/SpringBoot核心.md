@@ -136,9 +136,124 @@ pets:
 pets: [cat,dog,pig]
 ```
 
+## 3、配置文件值注入
+
+### 3.0、Value用法
+
+配置文件（application.properties)
+
+```properties
+person.lastName=ck
+```
+
+JavaBean:
+
+```java
+
+@Componet
+public class Person{
+    @Value("${person.lastName}")
+    private String lastName;
+}
+
+```
+
+RestController使用的时候，直接@Autowired，注入到类中即可。
+
+```java
+
+@RestController
+public class RController{
+    @Autowired
+    private Person person;
+    
+    @GetMapping("/person")
+    public String person(
+    	return person.toString();
+    )
+}
+```
+
+### 3.1、ConfigurationProperties用法
 
 
 
+配置文件（application.yml）
+
+```yaml
+person:
+	lastName: hello
+	age: 18
+	boss: false
+	birth: 2017/12/12
+	maps: {k1: v1,k2: 12}
+	lists:
+		- lisi
+		- zhaoliu
+	dog:
+		name: 小狗
+		age: 18
+```
+
+JavaBean:
+
+```java
+/** 将配置文件中配置的每一个属性的值，映射到这个组件中，
+ * @ConfigurationProperties: 告诉SpringBoot将本类中的所有属性和配置文件中相关的配置进行绑定。
+ 		@ConfigurationProperties(value = "person")，配置文件中person.xxx的所有属性一一对应。
+ * 只用将这个组件注册到容器中的时候，使用（@Component）才能
+@Componet
+@ConfigurationProperties(value = "person")
+public class Person{
+	private String lastName;
+	private Integer age;
+	private Boolean boss;
+	private Date birth;
+	
+	private Map<String,Object> maps;
+	private List<Object> lists;
+	private Dog dog;
+}
+
+```
+
+在maven中倒入spring-boot-configuration-processor
+
+```xml
+
+<!‐‐导入配置文件处理器,配置文件进行绑定就会有提示‐‐>
+
+<dependency>
+	<groupId>org.springframework.boot</groupId>
+	<artifactId>spring‐boot‐configuration‐processor</artifactId>
+	<optional>true</optional>
+</dependency>
+```
+
+### 3.2、@Value获取值与@ConfigurationProperties获取值比较
+
+
+
+|          | @ConfigurationProperties | @Value     |
+| -------- | :----------------------: | ---------- |
+| 功能     | 批量注入配置文件中的属性 | 一个个指定 |
+| 松散绑定 |           支持           | 不支持     |
+|          |                          |            |
+|          |                          |            |
+|          |                          |            |
+
+* 如果说，我们只是在某个业务逻辑中需要获取配置文件中的某个值，使用@Value
+* 如果说，我们专门编写了一个JavaBean来和配置文件进行映射，我们使用@ConfigurationProperties
+
+### 3.3、配置文件注入值数据教研
+
+使用@Validated注解、@Email注解验证邮箱验证。
+
+### 3.4、@PropertySource与@ImportResource & @Bean
+
+
+
+@ConfigurationProperties
 
 [@PropertySource与@ConfigurationProperties](https://juejin.im/post/6844903992544198664)
 

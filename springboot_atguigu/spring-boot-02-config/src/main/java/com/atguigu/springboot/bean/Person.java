@@ -22,6 +22,7 @@ import java.util.Map;
  *
  * @date ：11/2/20 7:26 PM
  */
+@PropertySource(value = {"classpath:person.properties"})
 @Component
 @ConfigurationProperties(prefix = "person")
 public class Person {
