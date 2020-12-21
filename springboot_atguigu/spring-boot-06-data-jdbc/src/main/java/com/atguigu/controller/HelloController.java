@@ -1,5 +1,7 @@
 package com.atguigu.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -16,11 +18,13 @@ import java.util.Map;
 
 @RestController
 public class HelloController {
+
+    @Autowired
+    JdbcTemplate jdbcTemplate;
+
     @GetMapping("/query")
     public List<Map<String,Object>> map(){
-        Map<String,Object> m = new HashMap<>();
-        m.put("1","1");
-        List<Map<String,Object>> list =Arrays.asList(m);
+        List<Map<String,Object>> list = jdbcTemplate.queryForList("select * FROM department");
         return list;
     }
 }
