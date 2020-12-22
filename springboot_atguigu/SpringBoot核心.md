@@ -579,17 +579,147 @@ org.springframework.boot.autoconfigure.web.JspTemplateAvailabilityProvider
 
 
 
+# 三、日志
 
+TODO
 
-[]()
-
-
-
-
-
+# 四、Web开发
 
 
 
+### 8、配置嵌入式Servlet容器
+
+TODO
+
+# 
+
+# 六、SpringBoot与数据访问
+
+
+
+## 6.1、JDBC
+
+```xml
+<dependency>
+	<groupId>org.framework.boot</groupId>	
+    <artifactId>spring-boot-starter-jdbc</artifactId>
+</dependency>
+<dependency>
+	<groupId>mysql</groupId>
+    <artifactId>mysql-connector-java</artifactId>
+    <scope>runtime</scope>
+</dependency>
+```
+
+```yml
+spring:
+	datasource:
+		username: root
+		password: 123456
+		url: jdbc:mysql:///jdbc
+		driver-class-name: com.mysql.jdbc.Driver
+```
+
+效果：
+
+默认是用org.springframework.boot.autoconfigure.jdbc作为数据源;
+
+数据源的相关配置在DataSourceProperties里面。
+
+自动配置原理：
+
+org.springframework.boot.autoconfigure.jdbc:
+
+1、参考DataSourceConfiguration，根据配置创建数据源，默认使用Tomcat连接池；可以使用spring.datasource.type指定自定义的数据源类型。
+
+2、SpringBoot默认可以支持：
+
+```
+org.apache.tomcat.jdbc.pool.DataSource、HikariDataSource、BasicDataSource、
+```
+
+3、自定义数据源类型
+
+```java
+@ConditionalOnMissingBean(DataSource.class)
+@ConditionalOnProperty(name = "spring.datasource.type")
+static class Generic {
+    @Bean
+    public DataSource dataSource(DataSourceProperties properties){
+        // 使用DataSourceBuilder创建数据源，利用反射创建相应type的数据源，并且相关属性。
+        return properties.initializeDataSourceBuilder().build();
+    }
+}
+```
+
+4、DataSourceInitializer:ApplicationListener;
+
+```yml
+schema:
+	- classpath:department.sql
+```
+
+
+
+## 6.2、整合Druid数据源
+
+#### 6.2.1、如果不是用Druid也可以
+
+上述过程如果不整合durid也可以访问，只需要配置yml文件中的以下配置即可
+
+```yml
+spring:
+	datasource:
+		username: root
+		password: root
+		url: jdbc:mysql:///jdbc
+		driver-class-name: com.mysql.jdbc.Driver
+```
+
+在Controller中引入JDBCTemplate
+
+```java
+@Autowired
+private JDBCTemplate jdbcTemplate
+    
+```
+
+然后在Controller直接写sql即可
+
+```java
+List<Map<String, Object>> map =  jdbcTemplate.query("select * from departement");
+```
+
+这个时候使用的Connection类型是：
+
+```yml
+org.apache.tomcat.jdbc.pool.DataSource
+```
+
+#### 6.2.2、如果使用的是Druid
+
+只需要在yml文件中定义好datasource为druid即可，同时添加以下Druid的Config 文件，用于把ServletRegistrationBean、FilterRegistrationBean注册到SpringBoot的Servlet容器中，这样可以访问Druid的配置页面。
+
+```java
+@Configuration
+public class DruidConfig {
+    @ConfigurationProperties(prefix="spring.datasource")
+    @Bean
+    public DataSource druid(){
+        return new DruidDataSource();
+    }
+    
+    //配置Druid的配置
+    //1、配置一个管理后台的Servlet
+    @Bean
+    public ServletRegistration statViewServlet(){
+        ServletRegistrationBean bean = new ServletRegistrationBean(new StatViewServlet(), '/druid/*');
+        Map<String,String> initParams = new HashMap<>();
+        // 配置druid的登陆用户名
+        initParams.put("loginUsername","admin")
+    }
+}
+```
 
 
 
