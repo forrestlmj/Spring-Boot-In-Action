@@ -716,7 +716,13 @@ public class DruidConfig {
         ServletRegistrationBean bean = new ServletRegistrationBean(new StatViewServlet(), '/druid/*');
         Map<String,String> initParams = new HashMap<>();
         // 配置druid的登陆用户名
-        initParams.put("loginUsername","admin")
+        initParams.put("loginUsername","admin");
+        initParams.put("loginPassword","123456");
+        // 默认就是允许所有访问
+        initParams.put("allow","");
+        
+        bean.setInitParameters(initParams);
+        return bean;
     }
 }
 ```
