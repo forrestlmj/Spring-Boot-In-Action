@@ -4,6 +4,7 @@ import com.alibaba.druid.pool.DruidDataSource;
 import com.alibaba.druid.support.http.StatViewServlet;
 import com.alibaba.druid.support.http.WebStatFilter;
 import com.sun.xml.internal.ws.api.ha.StickyFeature;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.boot.web.servlet.ServletRegistrationBean;
@@ -29,6 +30,10 @@ public class DruidConfig {
         return new DruidDataSource();
     }
 
+    @Value("${mydruid.username}")
+    private String username;
+    @Value("${mydruid.password}")
+    private String password;
     /**
      * 配置Druid的监控
      * 1、配置一个管理后台的Servlet
@@ -38,8 +43,8 @@ public class DruidConfig {
     public ServletRegistrationBean statViewServlet(){
         ServletRegistrationBean bean = new ServletRegistrationBean(new StatViewServlet(),"/druid/*");
         Map<String, String> map = new HashMap<>(4);
-        map.put("loginUsername","admin");
-        map.put("loginPassword","123456");
+        map.put("loginUsername",username);
+        map.put("loginPassword",password);
         map.put("allow","");
         bean.setInitParameters(map);
         return bean;
