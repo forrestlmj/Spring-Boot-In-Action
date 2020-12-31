@@ -12,12 +12,7 @@ public class Employee {
     private String lastName;
     private Integer gender;
 
-    public Employee(Integer id, String lastName, Integer gender, String email) {
-        this.id = id;
-        this.lastName = lastName;
-        this.gender = gender;
-        this.email = email;
-    }
+
 
     @Override
     public String toString() {

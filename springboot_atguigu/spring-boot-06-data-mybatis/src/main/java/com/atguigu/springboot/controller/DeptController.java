@@ -3,6 +3,7 @@ package com.atguigu.springboot.controller;
 import com.atguigu.springboot.bean.Department;
 import com.atguigu.springboot.bean.Employee;
 import com.atguigu.springboot.mapper.DepartmentMapper;
+import com.atguigu.springboot.mapper.EmployeeMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,10 +23,8 @@ public class DeptController {
     @Resource
     private DepartmentMapper departmentMapper;
 
-    @GetMapping("/emp/{id}")
-    public Employee getEmp(@PathVariable("id") Integer id){
-        return new Employee(1,"yangchengkai",1,"yangchengkai@yunzhangfang.com");
-    }
+    @Resource
+    private EmployeeMapper employeeMapper;
 
     @GetMapping("/dept/{id}")
     public Department getDept(@PathVariable("id") Integer id){
@@ -45,5 +44,9 @@ public class DeptController {
         return department;
     }
 
+    @GetMapping("/emp/{id}")
+    public Employee getEmp(@PathVariable("id") Integer id){
+        return employeeMapper.getEmpById(id);
+    }
 
 }
