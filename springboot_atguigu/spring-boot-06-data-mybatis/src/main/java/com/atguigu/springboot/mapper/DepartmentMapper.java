@@ -1,10 +1,7 @@
 package com.atguigu.springboot.mapper;
 
 import com.atguigu.springboot.bean.Department;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Options;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 import org.mybatis.spring.annotation.MapperScan;
 
 /**
@@ -21,4 +18,7 @@ public interface DepartmentMapper {
     @Insert("insert into department(departmentName) values (#{departmentName})")
     int insertDept(Department department);
 
+
+    @Delete("delete from department where id = #{id}")
+    int deleteDeptById(Integer id);
 }

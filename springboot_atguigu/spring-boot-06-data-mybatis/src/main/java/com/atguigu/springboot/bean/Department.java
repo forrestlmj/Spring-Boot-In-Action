@@ -11,6 +11,14 @@ public class Department {
     private Integer id;
     private String departmentName;
 
+    @Override
+    public String toString() {
+        return "Department{" +
+                "id=" + id +
+                ", departmentName='" + departmentName + '\'' +
+                '}';
+    }
+
     public Integer getId() {
         return id;
     }
