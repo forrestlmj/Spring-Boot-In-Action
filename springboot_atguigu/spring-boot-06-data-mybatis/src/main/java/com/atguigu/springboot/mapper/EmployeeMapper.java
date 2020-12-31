@@ -7,6 +7,6 @@ package com.atguigu.springboot.mapper;
  */
 
 
-public class EmployeeMapper {
+public interface EmployeeMapper {
 
 }

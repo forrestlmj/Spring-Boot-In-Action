@@ -3,8 +3,12 @@ package com.atguigu.springboot.controller;
 import com.atguigu.springboot.bean.Department;
 import com.atguigu.springboot.bean.Employee;
 import com.atguigu.springboot.mapper.DepartmentMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
@@ -17,6 +21,7 @@ import javax.annotation.Resource;
 
 @RestController
 public class DeptController {
+    Logger logger = LoggerFactory.getLogger(DeptController.class.getName());
     @Resource
     private DepartmentMapper departmentMapper;
 
@@ -29,4 +34,13 @@ public class DeptController {
     public Department getDept(@PathVariable("id") Integer id){
         return departmentMapper.getDeptById(id);
     }
+
+    @GetMapping("/dept")
+    public Department addDept(Department department){
+        departmentMapper.insertDept(department);
+        logger.info(department.toString());
+        return department;
+    }
+
+
 }
