@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
  */
 
 @Service
-public class DepartmentImpl implements DepartmentService {
+public class DepartmentServiceImpl implements DepartmentService {
     @Override
     public Department getDeptById(Integer id) {
         return new Department(1,"大数据部门");

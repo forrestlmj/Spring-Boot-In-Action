@@ -24,11 +24,13 @@ public class SwaggerConfig {
 
     @Bean
     public Docket postsApi(){
+        // requestHandlerSelector决定扫描那些包作为openapi
         return new Docket(DocumentationType.SWAGGER_2)
                 .groupName("forrestlmj")
                 .pathMapping("/")
                 .apiInfo(apiInfo())
                 .select()
+                .apis(RequestHandlerSelectors.basePackage("com.yck.springbootselflearning"))
                 .build();
 
     }

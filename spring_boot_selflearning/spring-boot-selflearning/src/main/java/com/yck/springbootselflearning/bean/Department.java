@@ -1,15 +1,18 @@
 package com.yck.springbootselflearning.bean;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
 /**
  * @author ：xxx
  * @description：TODO
  * @date ：2021/1/1 下午12:47
  */
 
-
+@ApiModel(value = "部门")
 public class Department {
+    @ApiModelProperty(value = "部门id")
     private Integer id;
-
     public Integer getId() {
         return id;
     }
@@ -38,6 +41,6 @@ public class Department {
     public void setDepartmentName(String departmentName) {
         this.departmentName = departmentName;
     }
-
+    @ApiModelProperty("部门名称")
     private String departmentName;
 }

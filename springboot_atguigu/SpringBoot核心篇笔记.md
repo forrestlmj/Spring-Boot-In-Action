@@ -860,7 +860,99 @@ spring:
 
 说明：从这部分开始，以下所有内容都是个人总结！用于记录。
 
+## 9.1、Swagger 3.x的配置
 
+swagger3.x的配置要比swagger2.x要简便的多。
+
+在配置swagger2.x的时候，需要引入两个dependency:
+
+```xml
+
+<dependency>
+	<groupId>io.springfox</groupId>
+    <artifactId>springfox-swagger2</artifactId>
+    <version>2.4.0</version>
+</dependency>
+
+<dependency>
+	<groupId>io.springfox</groupId>
+    <artifactId>springfox-swagger-ui</artifactId>
+    <version>2.4.0</version>
+</dependency>
+```
+
+除了配置SwaggerConfig以外，可能还要配置WebMvcAdapter的相关servlet配置，将swagger-ui的static下的页面都映射出来。
+
+因此这里主要介绍配置swagger3的方法：
+
+只需要引入一个pom包
+
+```xml
+<dependency>
+	<groupId>io.springfox</groupId>
+    <artifactId>springfox-boot-starter</artifactId>
+	<version>3.0.0</version>
+</dependency>
+```
+
+这个starter是3.0之后的新特性，但依旧是swagger团队自己定制的starter.
+
+剩下只需要配置Swagger相关配置SwaggerConfig:
+
+```java
+// 配置Configrution
+@Configuration
+@EnableOpenApi
+public class SwaggerConfig{
+    // 向springboot注入Docket的Bean
+    @Bean
+    public Docket createApi(){
+        return new Docket(DocumentationType.SWAGGER_2)
+            .groupName("forrestlmj")
+            .pathMapping("/")
+            .apiInfo(apiInfo())
+            .select()
+            .build();
+    }
+    
+    private ApiInfo apiInfo(){
+        return new ApiInfoBuilder()
+            .title("企业画像项目")
+            .description("企业画像是一个以SpringBoot为技术栈的项目")
+            .version("1.0.0")
+            .build();
+    }
+    
+}
+```
+
+## 9.2、Swagger的原理
+
+### 9.2.1、swagger、swaggerhub、swaggerui、OAS文档、springfox
+
+swagger不只支持java还支持其他语言
+
+接口的设计是非常重要的，因此需要有文档来好好记录接口的意思。
+
+springFox是swagger集成到spring framework的
+
+### 9.2.2、swagger主要的类
+
+注解在Configuration上。Docket、ApiInfo
+
+注解在Bean上。ApiModel、ApiModelProperty
+
+注解在Controller上。Api、ApiOperation、ApiParam
+
+参考链接：
+
+1、https://www.javainuse.com/spring/boot_swagger。印度人讲解的是视频。
+
+2、https://www.bilibili.com/video/BV184411J7Vy?from=search&seid=7997038278609076366。b站上最全的swagger文档。
+
+3、https://www.vojtechruzicka.com/documenting-spring-boot-rest-api-swagger-springfox/。B站视频上老哥主要查看的资料。
+
+3、https://editor.swagger.io/，在线的swagger编辑器
 
 
 
