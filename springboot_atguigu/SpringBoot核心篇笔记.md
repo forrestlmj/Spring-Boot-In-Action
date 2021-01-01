@@ -727,7 +727,100 @@ public class DruidConfig {
 }
 ```
 
+## 6.3 整合MyBatis
 
+```xml
+<dependency>
+	<groupId>org.mybatis.spring.boot</groupId>
+	<artifactId>mybatis-spring-boot-starter</artifactId>
+	<version>1.3.1</version>
+</dependency>
+
+```
+
+步骤：
+
+6.3.1、配置数据源相关属性。
+
+6.3.2、给数据库建表。
+
+6.3.3、创建JavaBean。
+
+6.3.4、注解版
+
+```java
+@Mapper
+public interface DepartmentMapper{
+    @Select("select * from department where id = #{id}")
+    public Department getDeptById(Integer id);
+    
+    @Delete("delete from department where id  = #{id}")
+    public int deleteDeptById(Integer id);
+    
+    @Options(useGeneratedKeys = true, keyProperty = "id")
+    @Insert("insert into department(departmentName) value (#{departmentName})")
+    public int insertDept(Department department);
+    
+    @Update("update department set departmentName = #{departmentName} where id = #{id}")
+    public int updateDept(Department department);
+}
+
+```
+
+6.3.5、注解版本
+
+```xml
+mybatis:
+	config-location: classpath:mybatis/mybatis-config.xml
+ 	mapper-locations: classpath:mybaits/mapper/*.xml
+```
+
+## 6.4、整合SpringData JPA
+
+
+
+### 6.4.1、SpringData简介
+
+Application->SpringData->SpringData JPA/SpringData Redis/SpringData MongoDB->JPA规范->Hibernate/Toplink/OpenJPA
+
+### 6.4.2、整合SpringData JPA
+
+JPA;ORM 映射
+
+1、编写一个实体类（bean）和数据表进行映射、并且配置好映射关系。
+
+```java
+@Entity
+@Table(name="tbl_user")
+public class User{
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+    @Column(name = "last_name",length = 50)
+    private String lastName;
+    @Column
+    private String email;
+}
+
+```
+
+2、编写一个Dao接口来操作实体类对应的数据表
+
+```java
+public interface UserRepository extends JpaRepository<User, Integer>{
+    
+}
+```
+
+3、基本的JpaProperties
+
+```java
+spring:
+	jpa:
+		hibernate:
+			ddl-auto: update
+         show-sql: true
+```
 
 
 
