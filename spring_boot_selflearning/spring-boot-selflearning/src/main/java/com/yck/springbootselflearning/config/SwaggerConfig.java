@@ -29,7 +29,6 @@ public class SwaggerConfig {
                 .pathMapping("/")
                 .apiInfo(apiInfo())
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("com.yck.springbootselflearning"))
                 .build();
 
     }
