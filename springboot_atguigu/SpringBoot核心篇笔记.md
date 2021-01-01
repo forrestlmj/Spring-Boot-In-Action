@@ -1,5 +1,7 @@
 # 一、Spring Boot入门
 
+说明：第一章这一部分是入门，通过即可
+
 ## 1、Spring Boot简介
 
 ## 2、微服务
@@ -56,6 +58,16 @@ public class HelloController{
 ## 5、Hello World探究
 
 # 二、配置文件
+
+说明：这一部分内容干货比较多，主要包括：
+
+1、yaml文件的写法，map和list两种形式就够了
+
+2、配置文件中属性的自动注入，也就是@Value与@ConfigurationProperties两个注解的使用，很常用。
+
+3、yaml的多profile激活，也就是spring.activate.profile
+
+4、自动配置的原理，这一部分还是看书理解较好。
 
 ## 1、配置文件
 
@@ -581,21 +593,33 @@ org.springframework.boot.autoconfigure.web.JspTemplateAvailabilityProvider
 
 # 三、日志
 
-TODO
+说明：这部分在视频中没有讲太多实际操作，主要讲的是slf4j与logback的关系。这部分内容主要记录下，logback的xml配置如何编排好，以便于企业级的应用，
 
 # 四、Web开发
 
+说明：这部分视频中没有做前后端的分离，主要通过模板语言thymeleaf渲染，不再使用于一般企业的场景。而且模板语言在python技术栈也有对应的Jinji，这一类渲染类的模板语言对于后端工程师、大数据开发工程师的学习成本其实挺大的，主要原因是还是前后端工种不同，前端强调交互，后端、数据端强调稳定、准确。
 
+因此这一块的学习重点应该是restful的api风格，比如get\post\put\delete的使用、swagger配置、前后端接口约定如返回码、认证方式（token or session）等相关内容。
 
-### 8、配置嵌入式Servlet容器
+另外这一块还讲了Servlet容器相关的知识，这一块内容属于原理相关的东西，大数据工程师不需要太关注。
 
-TODO
+# 五、Docker
 
-# 
+说明：这部分视频中主要讲的是docker的使用，内容偏向入门，这部分不记录。
 
 # 六、SpringBoot与数据访问
 
+说明：这一部分是重点的的重点。要数量掌握
 
+具体知识点：
+
+1、jdbc
+
+2、druid
+
+3、SpringDataJPA
+
+4、Mybatis
 
 ## 6.1、JDBC
 
@@ -693,7 +717,7 @@ List<Map<String, Object>> map =  jdbcTemplate.query("select * from departement")
 这个时候使用的Connection类型是：
 
 ```yml
-org.apache.tomcat.jdbc.pool.DataSource
+Mybatisorg.apache.tomcat.jdbc.pool.DataSource
 ```
 
 #### 6.2.2、如果使用的是Druid
@@ -824,9 +848,17 @@ spring:
 
 
 
+# 七、启动配置原理
 
+说明：这部分属于原理，暂不总结
 
+# 八、自定义starter
 
+说明：这部分属于定制化开发，暂不总结。
+
+# 九、Spring Boot与swagger的集成
+
+说明：从这部分开始，以下所有内容都是个人总结！用于记录。
 
 
 
