@@ -846,7 +846,18 @@ spring:
          show-sql: true
 ```
 
+### 6.4.3、SpringData JPA中的知识点
 
+1、JPA中的主键生成
+
+Jpa的主键生成策略(GenerationTYPE)有四种:
+
+- TABLE
+- SEQUENCE
+- IDENTITY
+- AUTO
+
+2、SpringDataJPA主要用到的几个关键注解如@Table、@Id、@Column、@Entity几种注解
 
 # 七、启动配置原理
 
@@ -956,13 +967,68 @@ springFox是swagger集成到spring framework的
 
 
 
+# n、mybatis-plus
+
+结合了mybatis与JPA的优点，但是用的人不多。
+
+# n+1、dto、dao、vo等不同层之间的数据传输类型
+
+## 为什么有这么多的数据传输类型
+
+- 为安全性考虑，比如在数据库中存储的一些用户名密码，或是不能返回给前端展示的，同时也不能把数据库的主要字段暴露出去。
+- 节省带宽，比如数据库中一些无用的信息没必要给前端或接口展示，浪费带宽。
+
+## 每一层的基本含义
+
+- PO。Persitant Obecct。常用。
+
+  用于表示数据库中的一条记录映射成的java对象。PO仅仅用于表示数据，**没有任何数据操作**。通常遵守Java Bean的规范，拥有getter/setter方法。**其实对应的就是Spring Data JPA里面被注解为Entity或者Table的POJO类**。
+
+- DAO。Data Access Object。天天在用。
+
+  用于表示一个数据访问对象。使用DAO访问数据库，包括插入、更新、删除、查询等操作，与po一起使用。DAO一般在**持久层**(**其实就是指Spring Data Jpa与Mybatis的实现**)，完全封装数据库操作，对外暴露的方法使得上层应用不需要关注数据库相关的任何信息。
+
+- VO。View/Value Object。常用。
+
+  用于表示一个与前端进行交互的java对象。一般不能直接用上面的po，因为这样会暴露数据库的表结构等安全性问题。因此使用vo：只需要包行前端需要展示的数据即可，对于前端不需要的数据，比如数据创建和修改等时间字段，就不展示在vo里面了。通常遵守Java Bean的规范，拥有getter/setter方法。**其实对应的就是mvc中的controller返回前端的数据比如RequestBody、ResponseBody中包的业务数据**。
+
+- DTO。Data Transfer Obect。其实不咋常用。
+
+  和vo的字段差不多，通常用于不同服务或服务不同分层之间的数据传输。比如API服务需要使用的DTO就可能与VO存在差异，比如**API**服务。通常遵循Java Bean的规范，拥有getter/setter方法。这里的服务可能就是指Spring cloud中传输的dto。
+
+- BO。Business Object。没咋见过。
+
+  可能就是Spring Cloud中的服务调用概念。BO包含了业务逻辑，常常封装了对DAO、RPC等的调用。BO通常位于业务层，要**区分于直接对外提供服务的服务层**，可能就是指中台服务、Spring Cloud里面注册中心那一套。BO提供了基本业务单元的基本业务操作，在设计上属于被服务层业务流程调用的对象，一个业务流程可能需要调用多个BO来完成。
+
+另外补充一下对于POJO的说明：
+
+- POJO。Plan Old Java Object。和上面不一样。就是一个简单的java对象，上面说的PO\VO\DTO属于典型的POJO。而DAO、BO一般都不是POJO，因为他们类似于Mybatis、Spring DataJPA、Spring Cloud、rpc，属于操作po\vo\dto的主体。
+
+## 这些数据传输类型如何在mvc中转化
+
+如下图：
+
+![](/home/yzf/IdeaProjects/Spring-Boot-In-Action/springboot_atguigu/img/po_vo_dto.jpg)
+
+## 那么每一层之间有什么转换方案
+
+目前主要方案有两种Model Mapper与MapStruct
+
+TODO **待教程补充**
 
 
 
+参考链接：
 
+1、https://www.zhihu.com/question/39651928，关于po、dto的讨论，知乎上的讨论值得一看。
 
+2、https://zhuanlan.zhihu.com/p/102389552，dto、dao的总结。
 
+3、https://www.baeldung.com/entity-to-and-from-dto-for-a-java-spring-application，Model Mapper的使用指南。
 
+4、https://zhuanlan.zhihu.com/p/81264434，Model Mapper同类型的MapStruct的使用指南。
+
+5、https://en.wikipedia.org/wiki/Data_access_object。wiki上对于DAO的解释，有增删改查的方法。给我的感觉就是提供一个interface 层，来访问数据库，与JPA的Repository和Mybatis的Mapper层功能是一样的。就是MVC中的model。
 
 
 
