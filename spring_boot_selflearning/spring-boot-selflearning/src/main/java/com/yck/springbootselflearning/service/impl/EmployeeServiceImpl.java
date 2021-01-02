@@ -1,6 +1,6 @@
 package com.yck.springbootselflearning.service.impl;
 
-import com.yck.springbootselflearning.bean.Employee;
+import com.yck.springbootselflearning.dao.Employee;
 import com.yck.springbootselflearning.repository.EmployeeRepository;
 import com.yck.springbootselflearning.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;

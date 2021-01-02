@@ -1,6 +1,5 @@
-package com.yck.springbootselflearning.bean;
+package com.yck.springbootselflearning.dao;
 
-import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
@@ -12,7 +11,7 @@ import javax.persistence.*;
  * @date ：2021/1/1 下午12:46
  */
 @Entity
-@Table(name = "employee")
+@Table
 @ApiModel(value = "雇员")
 public class Employee {
     @Id

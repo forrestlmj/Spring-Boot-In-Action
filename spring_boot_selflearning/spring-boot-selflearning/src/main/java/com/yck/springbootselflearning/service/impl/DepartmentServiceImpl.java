@@ -1,8 +1,12 @@
 package com.yck.springbootselflearning.service.impl;
 
-import com.yck.springbootselflearning.bean.Department;
+import com.yck.springbootselflearning.dao.Department;
+import com.yck.springbootselflearning.repository.DepartmentRepository;
 import com.yck.springbootselflearning.service.DepartmentService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 /**
  * @author ：xxx
@@ -12,8 +16,24 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class DepartmentServiceImpl implements DepartmentService {
+    @Autowired
+    private DepartmentRepository departmentRepository;
+
     @Override
     public Department getDeptById(Integer id) {
-        return new Department(1,"大数据部门");
+        Department one = departmentRepository.findById(id).orElse(null);
+        return one;
     }
+
+    @Override
+    public Department saveDept(Department department) {
+        return departmentRepository.save(department);
+    }
+
+    @Override
+    public void deleteDeptById(Integer id) {
+        departmentRepository.deleteById(id);
+    }
+
+
 }

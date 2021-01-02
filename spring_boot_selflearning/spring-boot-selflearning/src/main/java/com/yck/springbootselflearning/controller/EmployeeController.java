@@ -1,6 +1,6 @@
 package com.yck.springbootselflearning.controller;
 
-import com.yck.springbootselflearning.bean.Employee;
+import com.yck.springbootselflearning.dao.Employee;
 import com.yck.springbootselflearning.config.PersonConfig;
 import com.yck.springbootselflearning.service.EmployeeService;
 import io.swagger.annotations.Api;
