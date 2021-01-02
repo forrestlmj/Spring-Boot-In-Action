@@ -1,7 +1,9 @@
 package com.yck.springbootselflearning.service.impl;
 
 import com.yck.springbootselflearning.bean.Employee;
+import com.yck.springbootselflearning.repository.EmployeeRepository;
 import com.yck.springbootselflearning.service.EmployeeService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
@@ -12,8 +14,10 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
+    @Autowired
+    private EmployeeRepository employeeRepository;
     @Override
     public Employee getEmpById(Integer id) {
-        return new Employee(1,"yangck","yangck@163.com",1);
+        return employeeRepository.getOne(id);
     }
 }

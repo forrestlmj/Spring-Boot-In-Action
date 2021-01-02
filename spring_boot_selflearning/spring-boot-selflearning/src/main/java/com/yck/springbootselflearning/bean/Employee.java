@@ -4,26 +4,30 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
+import javax.persistence.*;
+
 /**
  * @author ：xxx
  * @description：TODO
  * @date ：2021/1/1 下午12:46
  */
+@Entity
+@Table(name = "employee")
 @ApiModel(value = "雇员")
 public class Employee {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @ApiModelProperty(value = "雇员id")
     private Integer id;
+
+    @Column
     @ApiModelProperty(value = "姓名")
     private String lastName;
+
+    @Column
     @ApiModelProperty(value = "邮箱地址")
     private String email;
 
-    public Employee(Integer id, String lastName, String email, Integer deptId) {
-        this.id = id;
-        this.lastName = lastName;
-        this.email = email;
-        this.deptId = deptId;
-    }
 
     @Override
     public String toString() {

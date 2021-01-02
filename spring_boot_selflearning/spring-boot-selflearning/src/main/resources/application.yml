@@ -1,15 +1,26 @@
 spring:
   profiles:
     active: dev
+  datasource:
+    url: jdbc:mysql://localhost:3306/selflearning?useSSL=false&characterEncoding=UTF-8
+    username: root
+    password: root
+    driver-class-name: com.mysql.jdbc.Driver
 person:
   name: yangck
   gender: male
+server:
+  address: 0.0.0.0
 ---
 spring:
   profiles: dev
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
 server:
   port: 8080
-
+debug: true
 ---
 spring:
   profiles: prod
