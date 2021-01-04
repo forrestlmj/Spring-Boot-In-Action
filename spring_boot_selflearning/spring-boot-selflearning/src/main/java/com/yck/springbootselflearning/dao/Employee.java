@@ -29,7 +29,7 @@ public class Employee {
 
     @Column
     @ApiModelProperty(value = "薪水")
-    private Double salary;
+    private double salary;
     @Override
     public String toString() {
         return "Employee{" +

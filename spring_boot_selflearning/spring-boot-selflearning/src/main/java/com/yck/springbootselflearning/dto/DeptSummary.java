@@ -8,29 +8,6 @@ package com.yck.springbootselflearning.dto;
 
 
 public class DeptSummary {
-    public String getDepartmentName() {
-        return departmentName;
-    }
-
-    public void setDepartmentName(String departmentName) {
-        this.departmentName = departmentName;
-    }
-
-    public Double getPeopleCount() {
-        return peopleCount;
-    }
-
-    public void setPeopleCount(Double peopleCount) {
-        this.peopleCount = peopleCount;
-    }
-
-    public Double getSalaryCount() {
-        return salaryCount;
-    }
-
-    public void setSalaryCount(Double salaryCount) {
-        salaryCount = salaryCount;
-    }
 
     @Override
     public String toString() {
@@ -41,7 +18,31 @@ public class DeptSummary {
                 '}';
     }
 
+    public String getDepartmentName() {
+        return departmentName;
+    }
+
+    public void setDepartmentName(String departmentName) {
+        this.departmentName = departmentName;
+    }
+
+    public double getPeopleCount() {
+        return peopleCount;
+    }
+
+    public void setPeopleCount(double peopleCount) {
+        this.peopleCount = peopleCount;
+    }
+
+    public double getSalaryCount() {
+        return salaryCount;
+    }
+
+    public void setSalaryCount(double salaryCount) {
+        this.salaryCount = salaryCount;
+    }
+
     private String departmentName;
-    private Double peopleCount;
-    private Double salaryCount;
+    private double peopleCount;
+    private double salaryCount;
 }

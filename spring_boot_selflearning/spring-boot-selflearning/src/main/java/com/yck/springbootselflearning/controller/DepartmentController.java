@@ -1,6 +1,7 @@
 package com.yck.springbootselflearning.controller;
 
 import com.yck.springbootselflearning.dao.Department;
+import com.yck.springbootselflearning.dto.DeptSummary;
 import com.yck.springbootselflearning.service.DepartmentService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -8,6 +9,7 @@ import io.swagger.annotations.ApiParam;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * @author ：xxx
@@ -38,5 +40,11 @@ public class DepartmentController {
     @PutMapping("/dept")
     public Department updateDeptById(@RequestBody Department department){
         return departmentService.saveDept(department);
+    }
+
+    @ApiOperation(value = "修改部门",notes = "这个接口的备注说明")
+    @GetMapping("/dept/summary")
+    public List<DeptSummary> getDeptSummary(){
+        return departmentService.getDeptSummary();
     }
 }
