@@ -3,6 +3,8 @@ package com.yck.springbootselflearning.config;
 import com.alibaba.druid.pool.DruidDataSource;
 import com.alibaba.druid.support.http.StatViewServlet;
 import com.alibaba.druid.support.http.WebStatFilter;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.boot.web.servlet.ServletRegistrationBean;
@@ -22,6 +24,8 @@ import java.util.Map;
 
 @Configuration
 public class DruidConfig {
+    Logger logger = LoggerFactory.getLogger(MyBatisConfig.class);
+
     @ConfigurationProperties(prefix = "spring.datasource")
     @Bean
     public DataSource druid(){
@@ -30,6 +34,8 @@ public class DruidConfig {
 
     @Bean
     public ServletRegistrationBean servletRegistrationBean(){
+        logger.debug("加载Druid配置");
+
         ServletRegistrationBean bean = new ServletRegistrationBean(new StatViewServlet(),"/druid/*");
         Map<String, String> initParams = new HashMap<>();
 

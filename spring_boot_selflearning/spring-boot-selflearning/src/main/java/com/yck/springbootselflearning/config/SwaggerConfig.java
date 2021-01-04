@@ -1,5 +1,7 @@
 package com.yck.springbootselflearning.config;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import springfox.documentation.builders.ApiInfoBuilder;
@@ -21,10 +23,11 @@ import javax.swing.text.Document;
 @Configuration
 @EnableOpenApi
 public class SwaggerConfig {
-
+    Logger logger = LoggerFactory.getLogger(SwaggerConfig.class);
     @Bean
     public Docket postsApi(){
         // requestHandlerSelector决定扫描那些包作为openapi
+        logger.debug("加载Swagger配置");
         return new Docket(DocumentationType.SWAGGER_2)
                 .groupName("forrestlmj")
                 .pathMapping("/")
