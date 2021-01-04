@@ -36,6 +36,7 @@ public class Employee {
                 "id=" + id +
                 ", lastName='" + lastName + '\'' +
                 ", email='" + email + '\'' +
+                ", salary=" + salary +
                 ", deptId=" + deptId +
                 '}';
     }
