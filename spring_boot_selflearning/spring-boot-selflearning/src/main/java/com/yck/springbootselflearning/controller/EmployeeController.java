@@ -7,9 +7,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 
@@ -31,5 +29,21 @@ public class EmployeeController {
     public Employee getEmpById(@PathVariable @ApiParam(value = "员工id", defaultValue = "1") Integer id){
         System.out.println(personConfig.toString());
         return employeeService.getEmpById(id);
+    }
+
+    @ApiOperation(value = "增加员工",notes = "这个接口的一些说明")
+    @PostMapping("/employ")
+    public Employee addEmp(@RequestBody Employee employee){
+        return employeeService.saveEmp(employee);
+    }
+    @ApiOperation(value = "修改员工",notes = "这个接口的一些说明")
+    @PutMapping("/employ")
+    public Employee updateEmp(@RequestBody Employee employee){
+        return employeeService.saveEmp(employee);
+    }
+    @ApiOperation(value = "修改员工",notes = "这个接口的一些说明")
+    @DeleteMapping("/employ/{id}")
+    public void deleteEmp(@PathVariable @ApiParam(value = "员工id", defaultValue = "1") Integer id){
+        employeeService.deleteEmpById(id);
     }
 }

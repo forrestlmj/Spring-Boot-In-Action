@@ -27,7 +27,9 @@ public class Employee {
     @ApiModelProperty(value = "邮箱地址")
     private String email;
 
-
+    @Column
+    @ApiModelProperty(value = "薪水")
+    private Double salary;
     @Override
     public String toString() {
         return "Employee{" +
@@ -71,4 +73,12 @@ public class Employee {
     }
 
     private Integer deptId;
+
+    public Double getSalary() {
+        return salary;
+    }
+
+    public void setSalary(Double salary) {
+        this.salary = salary;
+    }
 }
