@@ -6,7 +6,7 @@ import io.swagger.annotations.ApiModelProperty;
 import javax.persistence.*;
 
 /**
- * @author ：xxx
+ * @author ：forrestlmj@github.com
  * @description：TODO
  * @date ：2021/1/1 下午12:46
  */

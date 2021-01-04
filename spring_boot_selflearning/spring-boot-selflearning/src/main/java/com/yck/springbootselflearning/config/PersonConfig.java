@@ -5,7 +5,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Component;
 
 /**
- * @author ：xxx
+ * @author ：forrestlmj@github.com
  * @description：TODO
  * @date ：2021/1/2 下午3:02
  */

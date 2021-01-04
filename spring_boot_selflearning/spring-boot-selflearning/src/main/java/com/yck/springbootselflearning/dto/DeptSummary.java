@@ -1,7 +1,7 @@
 package com.yck.springbootselflearning.dto;
 
 /**
- * @author ：xxx
+ * @author ：forrestlmj@github.com
  * @description：TODO
  * @date ：2021/1/4 上午11:20
  */
