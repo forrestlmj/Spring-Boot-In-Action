@@ -1012,7 +1012,7 @@ springFox是swagger集成到spring framework的
 
 ## 那么每一层之间有什么转换方案
 
-目前主要方案有两种Model Mapper与MapStruct
+目前主要方案有两种Model Mapper与MapStruct、BeanUtils（Apache/Spring）下都有
 
 TODO **待教程补充**
 
