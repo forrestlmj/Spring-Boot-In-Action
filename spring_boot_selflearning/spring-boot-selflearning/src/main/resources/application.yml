@@ -34,6 +34,14 @@ logging:
 
 
 ---
+hbase:
+  zookeeper:
+    quorum: slave01.prd.yzf,slave02.prd.yzf,slave03.prd.yzf
+    property:
+      clientPort: 2181
+zookeeper:
+  znode:
+    parent: /hbase
 spring:
   profiles: dev
   jpa:
