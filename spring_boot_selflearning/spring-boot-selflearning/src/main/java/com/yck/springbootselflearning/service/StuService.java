@@ -6,5 +6,5 @@ import com.yck.springbootselflearning.dao.Stu;
 public interface StuService {
     Stu getStuById(String id);
     Stu saveStu(Stu stu);
-    void deleteStuById(Stu id);
+    void deleteStuById(String id);
 }

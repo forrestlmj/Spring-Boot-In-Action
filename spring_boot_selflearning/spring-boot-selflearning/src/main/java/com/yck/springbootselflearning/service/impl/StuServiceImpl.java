@@ -3,6 +3,7 @@ package com.yck.springbootselflearning.service.impl;
 import com.yck.springbootselflearning.dao.Stu;
 import com.yck.springbootselflearning.mapper.StuRowMapper;
 import com.yck.springbootselflearning.service.StuService;
+import com.yck.springbootselflearning.util.Check;
 import org.apache.hadoop.hbase.util.Bytes;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.hadoop.hbase.HbaseTemplate;
@@ -28,8 +29,11 @@ public class StuServiceImpl implements StuService {
     private String STU_TABLE_NAME = "stu";
     @Override
     public Stu getStuById(String id) {
+
         Stu dto = this.hbaseTemplate.get(STU_TABLE_NAME, id, new StuRowMapper());
-        dto.setId(id);
+        if(!Check.AllFieldIsNull(dto)){
+            dto.setId(id);
+        }
         return dto;
     }
 
@@ -42,7 +46,8 @@ public class StuServiceImpl implements StuService {
     }
 
     @Override
-    public void deleteStuById(Stu id) {
-
+    public void deleteStuById(String id) {
+        hbaseTemplate.delete(STU_TABLE_NAME,id,INFO1);
+        hbaseTemplate.delete(STU_TABLE_NAME,id,INFO2);
     }
 }

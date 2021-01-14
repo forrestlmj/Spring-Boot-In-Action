@@ -31,5 +31,6 @@ public class StuServiceImplTest {
 
     @Test
     public void deleteStuById() {
+        stuService.deleteStuById("11001");
     }
 }

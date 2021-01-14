@@ -10,6 +10,8 @@ import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.ws.rs.Path;
+
 /**
  * @author ：yangchengkai@yunzhangfang.com
  * @description：TODO
@@ -28,9 +30,15 @@ public class StuController {
     public Result<Stu> getStuById(@PathVariable @ApiParam(value = "学生id",defaultValue = "11001") String id){
         return ResultGenerator.getSuccessResult(stuService.getStuById(id));
     }
-    @ApiOperation(value = "获取学生", notes = "基于HBase")
+    @ApiOperation(value = "增加学生", notes = "")
     @PostMapping("/stu")
     public Result<Stu> getStuById(@RequestBody Stu stu){
         return ResultGenerator.getSuccessResult(stuService.saveStu(stu));
+    }
+    @ApiOperation(value = "删除学生", notes = "")
+    @PostMapping("/stu/{id}")
+    public Result<String> deleteStuById(@PathVariable @ApiParam(value = "学生id",defaultValue = "11001") String id){
+        stuService.deleteStuById(id);
+        return ResultGenerator.getSuccessResult("删除成功");
     }
 }
