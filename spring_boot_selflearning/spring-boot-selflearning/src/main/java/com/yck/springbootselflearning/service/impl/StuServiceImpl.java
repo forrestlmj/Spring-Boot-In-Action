@@ -1,19 +1,14 @@
 package com.yck.springbootselflearning.service.impl;
 
-import com.yck.springbootselflearning.common.StuEnum;
+import com.yck.springbootselflearning.common.HBaseColumnInfo;
 import com.yck.springbootselflearning.dao.Stu;
 import com.yck.springbootselflearning.mapper.StuRowMapper;
 import com.yck.springbootselflearning.service.StuService;
 import com.yck.springbootselflearning.util.Check;
-import io.micrometer.core.instrument.util.StringUtils;
-import org.apache.hadoop.hbase.client.Result;
 import org.apache.hadoop.hbase.util.Bytes;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.hadoop.hbase.HbaseTemplate;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * @author ：yangchengkai@yunzhangfang.com
@@ -40,15 +35,16 @@ public class StuServiceImpl implements StuService {
 
     @Override
     public Stu saveStu(Stu stu) {
-        hbaseTemplate.put(STU_TABLE_NAME,stu.getId(), StuEnum.info2.toString(),StuEnum.tel.toString(), Bytes.toBytes(stu.getTel()));
-        hbaseTemplate.put(STU_TABLE_NAME,stu.getId(),StuEnum.info1.toString(),StuEnum.name.toString(), Bytes.toBytes(stu.getName()));
-        hbaseTemplate.put(STU_TABLE_NAME,stu.getId(),StuEnum.info1.toString(),StuEnum.gender.toString(), Bytes.toBytes(stu.getGender()));
+        hbaseTemplate.put(STU_TABLE_NAME,stu.getId(),HBaseColumnInfo.STU_INFO1,HBaseColumnInfo.STU_INFO1_NAME, Bytes.toBytes(stu.getName()));
+        hbaseTemplate.put(STU_TABLE_NAME,stu.getId(),HBaseColumnInfo.STU_INFO1,HBaseColumnInfo.STU_INFO1_GENDER, Bytes.toBytes(stu.getGender()));
+        hbaseTemplate.put(STU_TABLE_NAME,stu.getId(), HBaseColumnInfo.STU_INFO2,HBaseColumnInfo.STU_INFO2_TEL, Bytes.toBytes(stu.getTel()));
+
         return stu;
     }
 
     @Override
     public void deleteStuById(String id) {
-        hbaseTemplate.delete(STU_TABLE_NAME,id,StuEnum.info1.toString());
-        hbaseTemplate.delete(STU_TABLE_NAME,id,StuEnum.info2.toString());
+        hbaseTemplate.delete(STU_TABLE_NAME,id,HBaseColumnInfo.STU_INFO1);
+        hbaseTemplate.delete(STU_TABLE_NAME,id,HBaseColumnInfo.STU_INFO2.toString());
     }
 }

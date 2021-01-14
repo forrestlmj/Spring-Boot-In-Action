@@ -1,6 +1,6 @@
 package com.yck.springbootselflearning.mapper;
 
-import com.yck.springbootselflearning.common.StuEnum;
+import com.yck.springbootselflearning.common.HBaseColumnInfo;
 import com.yck.springbootselflearning.dao.Stu;
 import org.apache.hadoop.hbase.client.Result;
 import org.apache.hadoop.hbase.util.Bytes;
@@ -21,9 +21,9 @@ public class StuRowMapper implements RowMapper<Stu> {
 
 
         Stu stu = new Stu();
-        stu.setName(Bytes.toString(result.getValue(StuEnum.info1.toString().getBytes(),StuEnum.name.toString().getBytes())));
-        stu.setGender(Bytes.toString(result.getValue(StuEnum.info1.toString().getBytes(), StuEnum.gender.toString().getBytes())));
-        stu.setTel(Bytes.toString(result.getValue(StuEnum.info2.toString().getBytes(), StuEnum.tel.toString().getBytes())));
+        stu.setName(Bytes.toString(result.getValue(HBaseColumnInfo.STU_INFO1.getBytes(),HBaseColumnInfo.STU_INFO1_NAME.getBytes())));
+        stu.setGender(Bytes.toString(result.getValue(HBaseColumnInfo.STU_INFO1.getBytes(), HBaseColumnInfo.STU_INFO1_GENDER.getBytes())));
+        stu.setTel(Bytes.toString(result.getValue(HBaseColumnInfo.STU_INFO2.getBytes(), HBaseColumnInfo.STU_INFO2_TEL.getBytes())));
         return stu;
     }
 }
